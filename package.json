@@ -1,0 +1,22 @@
+{
+  "name": "fair-odds-calculator",
+  "version": "1.0.0",
+  "description": "A calculator for fair odds in sports betting",
+  "main": "src/index.jsx",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "vite": "^4.4.0",
+    "@vitejs/plugin-react": "^4.0.0"
+  },
+  "keywords": ["react", "sports-betting", "calculator"],
+  "author": "Fair Odds Project",
+  "license": "MIT"
+}

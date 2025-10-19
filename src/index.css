@@ -1,0 +1,253 @@
+:root {
+  --bg-primary: #080c1f;
+  --bg-secondary: #0f1630;
+  --bg-tertiary: #121a35;
+  --text-primary: white;
+  --text-secondary: #e0e0e0;
+  --text-muted: #9ca3af;
+  --border-color: #374151;
+  --button-bg: #2563eb;
+  --button-hover: #1d4ed8;
+  --card-bg: #0f1630;
+  --input-bg: #121a35;
+  --input-text: white; /* Add text color for inputs */
+  --positive: #4ade80;
+  --negative: #f87171;
+  --warning: #facc15;
+  --blue-500: #3b82f6; /* Add blue-500 color */
+}
+
+.light-mode {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-tertiary: #e2e8f0;
+  --text-primary: #000000;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --border-color: #cbd5e1;
+  --button-bg: #3b82f6;
+  --button-hover: #2563eb;
+  --card-bg: #ffffff;
+  --input-bg: #f1f5f9;
+  --input-text: #000000; /* Add text color for inputs in light mode */
+  --positive: #16a34a;
+  --negative: #dc2626;
+  --warning: #ca8a04;
+  --blue-500: #3b82f6; /* Add blue-500 color */
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Add input text color styling */
+input {
+  color: var(--input-text);
+}
+
+/* Add button styling to override user agent styles */
+button {
+  color: inherit;
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: var(--button-bg);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background-color: var(--button-hover);
+  transform: scale(1.1);
+}
+
+/* Basic styling for the components */
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.border {
+  border: 1px solid var(--border-color);
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.rounded-md {
+  border-radius: 0.375rem;
+}
+
+.text-white {
+  color: var(--text-primary);
+}
+
+.text-blue-500 {
+  color: var(--blue-500);
+}
+
+.bg-blue-600 {
+  background-color: var(--button-bg);
+}
+
+.hover\:bg-blue-700:hover {
+  background-color: var(--button-hover);
+}
+
+.w-full {
+  width: 100%;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.grid {
+  display: grid;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gap-3 {
+  gap: 0.75rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.max-w-3xl {
+  max-width: 48rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.text-green-400 {
+  color: var(--positive);
+}
+
+.text-red-400 {
+  color: var(--negative);
+}
+
+.text-yellow-400 {
+  color: var(--warning);
+}
+
+.text-gray-400 {
+  color: var(--text-muted);
+}
+
+.bg-\[var\(--button-bg\)\] {
+  background-color: var(--button-bg);
+}
+
+.bg-\[\#0f1630\] {
+  background-color: var(--card-bg);
+}
+
+.bg-\[\#121a35\] {
+  background-color: var(--input-bg);
+}
+
+.border-gray-700 {
+  border-color: var(--border-color);
+}
+
+.border-gray-600 {
+  border-color: var(--border-color);
+}
