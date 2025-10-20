@@ -46,9 +46,10 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Add input text color styling */
+/* Add input styling */
 input {
   color: var(--input-text);
+  background-color: var(--input-bg);
 }
 
 /* Add button styling to override user agent styles */
