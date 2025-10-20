@@ -1,20 +1,21 @@
 :root {
-  --bg-primary: #080c1f;
-  --bg-secondary: #0f1630;
-  --bg-tertiary: #121a35;
+  /* Lighter blue-toned dark mode background colors */
+  --bg-primary: #1a365d;     /* Lighter blue */
+  --bg-secondary: #2a4b7c;   /* Lighter card background */
+  --bg-tertiary: #3a5f9b;    /* Lighter input background */
   --text-primary: white;
   --text-secondary: #e0e0e0;
-  --text-muted: #9ca3af;
-  --border-color: #374151;
+  --text-muted: #a0aec0;
+  --border-color: #4a5568;
   --button-bg: #2563eb;
   --button-hover: #1d4ed8;
-  --card-bg: #0f1630;
-  --input-bg: #121a35;
-  --input-text: white; /* Add text color for inputs */
+  --card-bg: #2a4b7c;        /* Match bg-secondary */
+  --input-bg: #3a5f9b;       /* Match bg-tertiary */
+  --input-text: white;
   --positive: #4ade80;
   --negative: #f87171;
   --warning: #facc15;
-  --blue-500: #3b82f6; /* Add blue-500 color */
+  --blue-500: #3b82f6;
 }
 
 .light-mode {
@@ -29,11 +30,11 @@
   --button-hover: #2563eb;
   --card-bg: #ffffff;
   --input-bg: #f1f5f9;
-  --input-text: #000000; /* Add text color for inputs in light mode */
+  --input-text: #000000;
   --positive: #16a34a;
   --negative: #dc2626;
   --warning: #ca8a04;
-  --blue-500: #3b82f6; /* Add blue-500 color */
+  --blue-500: #3b82f6;
 }
 
 body {

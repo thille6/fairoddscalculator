@@ -229,13 +229,13 @@ export default function FairOddsCalculator() {
 
       {/* Simple tab implementation */}
       <div className="w-full">
-        <div className="flex rounded-md mb-4 bg-[#121a35] border border-gray-700" style={{ borderBottom: '1px solid #374151' }}>
+        <div className="flex rounded-md mb-4 bg-[var(--bg-tertiary)] border border-gray-700" style={{ borderBottom: '1px solid var(--border-color)' }}>
           <button 
             onClick={() => setTab('1x2')}
             className={`px-4 py-2 flex-1 text-center ${tab === '1x2' ? 'text-blue-500 font-bold' : 'text-white'}`}
             style={{
               fontWeight: 'bold',
-              borderBottom: tab === '1x2' ? '2px solid #3b82f6' : '2px solid transparent'
+              borderBottom: tab === '1x2' ? '2px solid var(--blue-500)' : '2px solid transparent'
             }}
           >
             1X2
@@ -245,7 +245,7 @@ export default function FairOddsCalculator() {
             className={`px-4 py-2 flex-1 text-center ${tab === 'asian' ? 'text-blue-500 font-bold' : 'text-white'}`}
             style={{
               fontWeight: 'bold',
-              borderBottom: tab === 'asian' ? '2px solid #3b82f6' : '2px solid transparent'
+              borderBottom: tab === 'asian' ? '2px solid var(--blue-500)' : '2px solid transparent'
             }}
           >
             Asian Handicap
@@ -255,7 +255,7 @@ export default function FairOddsCalculator() {
             className={`px-4 py-2 flex-1 text-center ${tab === 'ou' ? 'text-blue-500 font-bold' : 'text-white'}`}
             style={{
               fontWeight: 'bold',
-              borderBottom: tab === 'ou' ? '2px solid #3b82f6' : '2px solid transparent'
+              borderBottom: tab === 'ou' ? '2px solid var(--blue-500)' : '2px solid transparent'
             }}
           >
             Over/Under
@@ -266,7 +266,7 @@ export default function FairOddsCalculator() {
             className={`px-4 py-2 flex-1 text-center ${tab === 'doublechance' ? 'text-blue-500 font-bold' : 'text-white'}`}
             style={{
               fontWeight: 'bold',
-              borderBottom: tab === 'doublechance' ? '2px solid #3b82f6' : '2px solid transparent'
+              borderBottom: tab === 'doublechance' ? '2px solid var(--blue-500)' : '2px solid transparent'
             }}
           >
             Double Chance
@@ -275,19 +275,19 @@ export default function FairOddsCalculator() {
 
         {/* Tab content */}
         <div style={{ display: tab === '1x2' ? 'block' : 'none' }}>
-          <Card className="p-4 bg-[#0f1630] border-gray-700">
+          <Card className="p-4 bg-[var(--bg-secondary)] border-gray-700">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
                 <label className="text-gray-400 text-sm block mb-1">1 – Home</label>
-                <Input value={home} onChange={(e) => setHome(e.target.value)} className="bg-[#121a35] border-gray-600" />
+                <Input value={home} onChange={(e) => setHome(e.target.value)} className="bg-[var(--bg-tertiary)] border-gray-600" />
               </div>
               <div>
                 <label className="text-gray-400 text-sm block mb-1">X – Draw</label>
-                <Input value={draw} onChange={(e) => setDraw(e.target.value)} className="bg-[#121a35] border-gray-600" />
+                <Input value={draw} onChange={(e) => setDraw(e.target.value)} className="bg-[var(--bg-tertiary)] border-gray-600" />
               </div>
               <div>
                 <label className="text-gray-400 text-sm block mb-1">2 – Away</label>
-                <Input value={away} onChange={(e) => setAway(e.target.value)} className="bg-[#121a35] border-gray-600" />
+                <Input value={away} onChange={(e) => setAway(e.target.value)} className="bg-[var(--bg-tertiary)] border-gray-600" />
               </div>
             </div>
             <div className="mt-3 flex gap-2">
@@ -298,21 +298,21 @@ export default function FairOddsCalculator() {
         </div>
 
         <div style={{ display: tab === 'asian' ? 'block' : 'none' }}>
-          <Card className="p-4 bg-[#0f1630] border-gray-700">
+          <Card className="p-4 bg-[var(--bg-secondary)] border-gray-700">
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="text-gray-400 text-sm block mb-1">Asian Home</label>
                 <Input value={asianHome} onChange={(e) => {
                   console.log('Setting asianHome to:', e.target.value);
                   setAsianHome(e.target.value);
-                }} className="bg-[#121a35] border-gray-600" />
+                }} className="bg-[var(--bg-tertiary)] border-gray-600" />
               </div>
               <div>
                 <label className="text-gray-400 text-sm block mb-1">Asian Away</label>
                 <Input value={asianAway} onChange={(e) => {
                   console.log('Setting asianAway to:', e.target.value);
                   setAsianAway(e.target.value);
-                }} className="bg-[#121a35] border-gray-600" />
+                }} className="bg-[var(--bg-tertiary)] border-gray-600" />
               </div>
             </div>
             <div className="mt-3 flex gap-2">
@@ -323,21 +323,21 @@ export default function FairOddsCalculator() {
         </div>
 
         <div style={{ display: tab === 'ou' ? 'block' : 'none' }}>
-          <Card className="p-4 bg-[#0f1630] border-gray-700">
+          <Card className="p-4 bg-[var(--bg-secondary)] border-gray-700">
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="text-gray-400 text-sm block mb-1">Over</label>
                 <Input value={over} onChange={(e) => {
                   console.log('Setting over to:', e.target.value);
                   setOver(e.target.value);
-                }} className="bg-[#121a35] border-gray-600" />
+                }} className="bg-[var(--bg-tertiary)] border-gray-600" />
               </div>
               <div>
                 <label className="text-gray-400 text-sm block mb-1">Under</label>
                 <Input value={under} onChange={(e) => {
                   console.log('Setting under to:', e.target.value);
                   setUnder(e.target.value);
-                }} className="bg-[#121a35] border-gray-600" />
+                }} className="bg-[var(--bg-tertiary)] border-gray-600" />
               </div>
             </div>
             <div className="mt-3 flex gap-2">
@@ -347,21 +347,20 @@ export default function FairOddsCalculator() {
           </Card>
         </div>
 
-        {/* New Double Chance tab content */}
         <div style={{ display: tab === 'doublechance' ? 'block' : 'none' }}>
-          <Card className="p-4 bg-[#0f1630] border-gray-700">
+          <Card className="p-4 bg-[var(--bg-secondary)] border-gray-700">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
                 <label className="text-gray-400 text-sm block mb-1">1X – Home or Draw</label>
-                <Input value={dc1x} onChange={(e) => setDc1x(e.target.value)} className="bg-[#121a35] border-gray-600" />
+                <Input value={dc1x} onChange={(e) => setDc1x(e.target.value)} className="bg-[var(--bg-tertiary)] border-gray-600" />
               </div>
               <div>
                 <label className="text-gray-400 text-sm block mb-1">12 – Home or Away</label>
-                <Input value={dc12} onChange={(e) => setDc12(e.target.value)} className="bg-[#121a35] border-gray-600" />
+                <Input value={dc12} onChange={(e) => setDc12(e.target.value)} className="bg-[var(--bg-tertiary)] border-gray-600" />
               </div>
               <div>
                 <label className="text-gray-400 text-sm block mb-1">X2 – Draw or Away</label>
-                <Input value={dcx2} onChange={(e) => setDcx2(e.target.value)} className="bg-[#121a35] border-gray-600" />
+                <Input value={dcx2} onChange={(e) => setDcx2(e.target.value)} className="bg-[var(--bg-tertiary)] border-gray-600" />
               </div>
             </div>
             <div className="mt-3 flex gap-2">
@@ -373,104 +372,43 @@ export default function FairOddsCalculator() {
       </div>
 
       {results && (
-        <Card className="mt-4 p-4 bg-[#0f1630] border-gray-700">
-          {/* Updated results display for detailed table view */}
-          {tab === 'doublechance' && results.rows ? (
+        <Card className="mt-4 p-4 bg-[var(--bg-secondary)] border-gray-700">
+          <div className={`grid text-center gap-3`} style={{ gridTemplateColumns: `repeat(3, minmax(0, 1fr))` }}>
             <div>
-              {/* Validation warning */}
-              {!results.valid && (
-                <div className="bg-yellow-900/50 border border-yellow-700 rounded p-3 mb-4 text-yellow-200 text-sm">
-                  ⚠️ Warning: The input odds may not satisfy the triangle inequality conditions. 
-                  Please double-check that the odds are valid for a Double Chance market.
-                </div>
-              )}
-              
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm text-left">
-                  <thead className="text-xs uppercase">
-                    <tr>
-                      <th scope="col" className="px-4 py-3">Typ</th>
-                      <th scope="col" className="px-4 py-3">Bookie Odds</th>
-                      <th scope="col" className="px-4 py-3">Fair Odds</th>
-                      <th scope="col" className="px-4 py-3">Bookie Implied</th>
-                      <th scope="col" className="px-4 py-3">Fair Prob</th>
-                      <th scope="col" className="px-4 py-3">Edge</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {results.rows.map((row, i) => (
-                      <tr key={i} className="border-b border-gray-700">
-                        <td className="px-4 py-3 font-medium">{row.type}</td>
-                        <td className="px-4 py-3">{row.bookie.toFixed(2)}</td>
-                        <td className={`px-4 py-3 font-medium ${row.bookie > row.fair ? 'text-green-400' : 'text-red-400'}`}>
-                          {row.fair.toFixed(2)}
-                        </td>
-                        <td className="px-4 py-3">{row.q.toFixed(2)}%</td>
-                        <td className="px-4 py-3">{row.fairP.toFixed(2)}%</td>
-                        <td className={`px-4 py-3 ${row.edge > 0 ? 'text-green-400' : 'text-red-400'}`}>
-                          {row.edge.toFixed(2)}%
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 pt-4 border-t border-gray-700">
-                <div>
-                  <p className="text-gray-400 text-xs mb-1">Underlying 1X2 Total Probability</p>
-                  <p className="text-lg font-bold text-blue-400">{results.underlying_1x2_total_probability}</p>
-                </div>
-                <div>
-                  <p className="text-gray-400 text-xs mb-1">Bookmaker Margin</p>
-                  <p className="text-lg font-bold text-yellow-400">{results.bookmaker_margin}</p>
-                </div>
-                <div>
-                  <p className="text-gray-400 text-xs mb-1">Fair Payout</p>
-                  <p className="text-lg font-bold text-green-400">{results.fair_payout}</p>
-                </div>
-              </div>
-              
-              {/* Consistency check warning */}
-              {results.overlap_check > 0.005 && (
-                <div className="mt-3 text-yellow-200 text-sm">
-                  ⚠️ Inkonsekventa DC-odds (överlappar inte ≈ 2×k). Kontrollera inmatningen.
-                </div>
-              )}
+              <p className="text-gray-400 text-xs mb-1">Bookmaker Margin</p>
+              <p className="text-lg font-bold text-yellow-400">{results.overRound}</p>
             </div>
-          ) : tab === 'doublechance' ? (
-            <div className="text-center py-4 text-red-400">
-              Error calculating Double Chance odds. Please check your input values.
-            </div>
-          ) : (
             <div>
-              <div className={`grid text-center gap-3`} style={{ gridTemplateColumns: `repeat(3, minmax(0, 1fr))` }}>
-                <div>
-                  <p className="text-gray-400 text-xs mb-1">Bookmaker Margin</p>
-                  <p className="text-lg font-bold text-yellow-400">{results.overRound}</p>
-                </div>
-                <div>
-                  <p className="text-gray-400 text-xs mb-1">Total Odds</p>
-                  <p className="text-lg font-bold">{results.sum}</p>
-                </div>
-                <div>
-                  <p className="text-gray-400 text-xs mb-1">Fair Payout</p>
-                  <p className="text-lg font-bold text-green-400">{results.payout}</p>
-                </div>
-              </div>
+              <p className="text-gray-400 text-xs mb-1">Total Odds</p>
+              <p className="text-lg font-bold">{results.sum}</p>
+            </div>
+            <div>
+              <p className="text-gray-400 text-xs mb-1">Fair Payout</p>
+              <p className="text-lg font-bold text-green-400">{results.payout}</p>
+            </div>
+          </div>
 
-              <div className={`grid gap-3 text-center mt-3`} style={{ gridTemplateColumns: `repeat(${
-                tab==='1x2' || tab==='doublechance' ? '3' : '2'
-              }, minmax(0, 1fr))` }}>
-                {results.fairO.map((o, i) => (
+          <div className={`grid gap-3 text-center mt-3`} style={{ gridTemplateColumns: `repeat(${tab==='1x2' || tab==='doublechance' ? '3' : '2'}, minmax(0, 1fr))` }}>
+            {results.fairO.map((o, i) => (
+              <div key={i}>
+                <p className="text-gray-400 text-xs mb-1">
+                  {tab==='1x2' ? ['1','X','2'][i] : tab==='asian' ? ['Home','Away'][i] : tab==='ou' ? ['Over','Under'][i] : ['1X','12','X2'][i]}
+                </p>
+                <p className="text-lg font-mono font-semibold">{o}</p>
+                <p className="text-xs text-gray-400">({results.fairP[i]})</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Display original odds for Double Chance */}
+          {tab === 'doublechance' && results.originalOdds && (
+            <div className="mt-4 pt-3 border-t border-gray-700">
+              <p className="text-gray-400 text-xs mb-2">Original Double Chance Odds</p>
+              <div className={`grid gap-3 text-center`} style={{ gridTemplateColumns: `repeat(3, minmax(0, 1fr))` }}>
+                {results.originalOdds.map((o, i) => (
                   <div key={i}>
-                    <p className="text-gray-400 text-xs mb-1">
-                      {tab==='1x2' ? ['1','X','2'][i] : 
-                       tab==='asian' ? ['Home','Away'][i] : 
-                       tab==='ou' ? ['Over','Under'][i] : ''}
-                    </p>
+                    <p className="text-gray-400 text-xs mb-1">{'1X12X2'[i*2]+(i===0?'':'2')}</p>
                     <p className="text-lg font-mono font-semibold">{o}</p>
-                    <p className="text-xs text-gray-400">({results.fairP[i]})</p>
                   </div>
                 ))}
               </div>
@@ -479,16 +417,16 @@ export default function FairOddsCalculator() {
         </Card>
       )}
 
-      <Card className="mt-4 p-4 bg-[#0f1630] border-gray-700">
+      <Card className="mt-4 p-4 bg-[var(--bg-secondary)] border-gray-700">
         <h2 className="text-sm font-semibold mb-2 text-gray-300">Expected Value Calculator</h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div>
             <label className="text-gray-400 text-xs block mb-1">Selection (e.g. 1 / Home / Over)</label>
-            <Input value={pick} onChange={(e) => setPick(e.target.value)} className="bg-[#121a35] border-gray-600" />
+            <Input value={pick} onChange={(e) => setPick(e.target.value)} className="bg-[var(--bg-tertiary)] border-gray-600" />
           </div>
           <div>
             <label className="text-gray-400 text-xs block mb-1">Your Odds</label>
-            <Input value={myOdds} onChange={(e) => setMyOdds(e.target.value)} className="bg-[#121a35] border-gray-600" />
+            <Input value={myOdds} onChange={(e) => setMyOdds(e.target.value)} className="bg-[var(--bg-tertiary)] border-gray-600" />
           </div>
           <div className="flex items-end">
             <Button onClick={calcEV} className="bg-blue-600 hover:bg-blue-700">Calculate EV</Button>
