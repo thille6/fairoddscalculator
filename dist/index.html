@@ -10,5 +10,13 @@
 <body>
   <div id="root"></div>
   
+  <script>
+    // Fallback in case the module fails to load
+    window.addEventListener('error', function(e) {
+      if (e.target.tagName === 'SCRIPT' && e.target.src && e.target.src.includes('index.jsx')) {
+        console.error('Failed to load index.jsx module. This might be due to a 404 error or MIME type issue.');
+      }
+    });
+  </script>
 </body>
 </html>

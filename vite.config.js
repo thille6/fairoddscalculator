@@ -11,7 +11,9 @@ export default defineConfig({
   plugins: [react()],
   server: {
     open: true,
-    port: 3000
+    port: 3000,
+    strictPort: false,
+    host: true
   },
   build: {
     outDir: 'dist',
@@ -35,5 +37,8 @@ export default defineConfig({
         '.jsx': 'jsx'
       }
     }
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.json']
   }
 });
