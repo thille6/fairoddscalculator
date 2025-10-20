@@ -137,6 +137,8 @@ export default function FairOddsCalculator() {
         const dc1xVal = toNum(dc1x), dc12Val = toNum(dc12), dcx2Val = toNum(dcx2);
         originalOdds = [dc1xVal, dc12Val, dcx2Val];
         p = [1 / dc1xVal, 1 / dc12Val, 1 / dcx2Val];
+        
+        // Continue with standard calculation for fallback
       }
     } else {
       console.log('Unknown tab:', tab);
@@ -144,25 +146,24 @@ export default function FairOddsCalculator() {
     }
 
     // For non-Double Chance tabs, use the standard calculation
-    if (tab !== 'doublechance') {
-      const sum = p.reduce((a, b) => a + b, 0);
-      const overRound = sum - 1;
-      const fairP = p.map((x) => x / sum);
-      const fairO = fairP.map((x) => 1 / x);
+    // This also handles the fallback for Double Chance when there's an error
+    const sum = p.reduce((a, b) => a + b, 0);
+    const overRound = sum - 1;
+    const fairP = p.map((x) => x / sum);
+    const fairO = fairP.map((x) => 1 / x);
 
-      console.log('Calculation results:', { sum, overRound, payout: 1 - overRound, fairP, fairO });
-      
-      const result = { 
-        sum: fmtPct(sum), 
-        overRound: fmtPct(overRound), 
-        payout: fmtPct(1 - overRound), 
-        fairP: fairP.map(fmtPct), 
-        fairO: fairO.map(fmt2),
-        originalOdds: originalOdds.map(fmt2)
-      };
-      console.log('Setting results:', result);
-      setResults(result);
-    }
+    console.log('Calculation results:', { sum, overRound, payout: 1 - overRound, fairP, fairO });
+    
+    const result = { 
+      sum: fmtPct(sum), 
+      overRound: fmtPct(overRound), 
+      payout: fmtPct(1 - overRound), 
+      fairP: fairP.map(fmtPct), 
+      fairO: fairO.map(fmt2),
+      originalOdds: originalOdds.map(fmt2)
+    };
+    console.log('Setting results:', result);
+    setResults(result);
   };
 
   const testCalc = () => {
@@ -191,7 +192,29 @@ export default function FairOddsCalculator() {
 
   const calcEV = () => {
     if (!results || !myOdds) return;
-    // Get the correct fair odds based on the selected pick
+    
+    // Handle Double Chance results differently
+    if (results.rows && tab === 'doublechance') {
+      // For Double Chance, we need to find the selected row
+      let selectedRow = null;
+      if (pick === '1X') {
+        selectedRow = results.rows[0]; // First row is 1X
+      } else if (pick === '12') {
+        selectedRow = results.rows[1]; // Second row is 12
+      } else if (pick === 'X2') {
+        selectedRow = results.rows[2]; // Third row is X2
+      }
+      
+      if (selectedRow) {
+        const fairOdds = selectedRow.fair;
+        const fairP = 1 / fairOdds;
+        const EV = toNum(myOdds) * fairP - 1;
+        setEv(EV.toFixed(3));
+      }
+      return;
+    }
+    
+    // Get the correct fair odds based on the selected pick for standard results
     let selectedIndex = 0;
     if (tab === '1x2') {
       selectedIndex = pick === '1' ? 0 : pick === 'X' ? 1 : 2;
@@ -199,9 +222,6 @@ export default function FairOddsCalculator() {
       selectedIndex = pick === 'Home' ? 0 : 1;
     } else if (tab === 'ou') {
       selectedIndex = pick === 'Over' ? 0 : 1;
-    } else if (tab === 'doublechance') {
-      // Handle double chance selections
-      selectedIndex = pick === '1X' ? 0 : pick === '12' ? 1 : 2;
     }
     
     // Make sure the selectedIndex is valid
@@ -373,42 +393,85 @@ export default function FairOddsCalculator() {
 
       {results && (
         <Card className="mt-4 p-4 bg-[var(--bg-secondary)] border-gray-700">
-          <div className={`grid text-center gap-3`} style={{ gridTemplateColumns: `repeat(3, minmax(0, 1fr))` }}>
+          {/* Check if this is a Double Chance result (has rows property) */}
+          {results.rows ? (
+            // Double Chance results rendering
             <div>
-              <p className="text-gray-400 text-xs mb-1">Bookmaker Margin</p>
-              <p className="text-lg font-bold text-yellow-400">{results.overRound}</p>
-            </div>
-            <div>
-              <p className="text-gray-400 text-xs mb-1">Total Odds</p>
-              <p className="text-lg font-bold">{results.sum}</p>
-            </div>
-            <div>
-              <p className="text-gray-400 text-xs mb-1">Fair Payout</p>
-              <p className="text-lg font-bold text-green-400">{results.payout}</p>
-            </div>
-          </div>
-
-          <div className={`grid gap-3 text-center mt-3`} style={{ gridTemplateColumns: `repeat(${tab==='1x2' || tab==='doublechance' ? '3' : '2'}, minmax(0, 1fr))` }}>
-            {results.fairO.map((o, i) => (
-              <div key={i}>
-                <p className="text-gray-400 text-xs mb-1">
-                  {tab==='1x2' ? ['1','X','2'][i] : tab==='asian' ? ['Home','Away'][i] : tab==='ou' ? ['Over','Under'][i] : ['1X','12','X2'][i]}
-                </p>
-                <p className="text-lg font-mono font-semibold">{o}</p>
-                <p className="text-xs text-gray-400">({results.fairP[i]})</p>
+              <div className="overflow-x-auto">
+                <table className="min-w-full divide-y divide-gray-700">
+                  <thead>
+                    <tr>
+                      <th className="px-2 py-1 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Typ</th>
+                      <th className="px-2 py-1 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Bookie Odds</th>
+                      <th className="px-2 py-1 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Fair Odds</th>
+                      <th className="px-2 py-1 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Implied Prob</th>
+                      <th className="px-2 py-1 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Fair Prob</th>
+                      <th className="px-2 py-1 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Edge %</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-700">
+                    {results.rows.map((row, index) => (
+                      <tr key={index}>
+                        <td className="px-2 py-1 whitespace-nowrap text-sm">{row.type}</td>
+                        <td className="px-2 py-1 whitespace-nowrap text-sm">{row.bookie.toFixed(2)}</td>
+                        <td className="px-2 py-1 whitespace-nowrap text-sm font-semibold">{row.fair.toFixed(2)}</td>
+                        <td className="px-2 py-1 whitespace-nowrap text-sm">{row.q.toFixed(2)}%</td>
+                        <td className="px-2 py-1 whitespace-nowrap text-sm">{row.fairP.toFixed(2)}%</td>
+                        <td className={`px-2 py-1 whitespace-nowrap text-sm ${row.edge > 0 ? 'text-red-400' : 'text-green-400'}`}>
+                          {row.edge.toFixed(2)}%
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-            ))}
-          </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 pt-4 border-t border-gray-700">
+                <div>
+                  <p className="text-gray-400 text-xs mb-1">Bookmaker Margin</p>
+                  <p className="text-lg font-bold text-yellow-400">{results.bookmaker_margin}</p>
+                </div>
+                <div>
+                  <p className="text-gray-400 text-xs mb-1">Total Probability</p>
+                  <p className="text-lg font-bold">{results.underlying_1x2_total_probability}</p>
+                </div>
+                <div>
+                  <p className="text-gray-400 text-xs mb-1">Fair Payout</p>
+                  <p className="text-lg font-bold text-green-400">{results.fair_payout}</p>
+                </div>
+              </div>
+              
+              <div className="mt-4 text-xs text-gray-500">
+                <p>Overlap Check: {results.overlap_check.toFixed(6)}</p>
+                <p>Valid: {results.valid ? 'Yes' : 'No'}</p>
+              </div>
+            </div>
+          ) : (
+            // Standard results rendering for 1x2, Asian, and Over/Under
+            <div>
+              <div className={`grid text-center gap-3`} style={{ gridTemplateColumns: `repeat(3, minmax(0, 1fr))` }}>
+                <div>
+                  <p className="text-gray-400 text-xs mb-1">Bookmaker Margin</p>
+                  <p className="text-lg font-bold text-yellow-400">{results.overRound}</p>
+                </div>
+                <div>
+                  <p className="text-gray-400 text-xs mb-1">Total Odds</p>
+                  <p className="text-lg font-bold">{results.sum}</p>
+                </div>
+                <div>
+                  <p className="text-gray-400 text-xs mb-1">Fair Payout</p>
+                  <p className="text-lg font-bold text-green-400">{results.payout}</p>
+                </div>
+              </div>
 
-          {/* Display original odds for Double Chance */}
-          {tab === 'doublechance' && results.originalOdds && (
-            <div className="mt-4 pt-3 border-t border-gray-700">
-              <p className="text-gray-400 text-xs mb-2">Original Double Chance Odds</p>
-              <div className={`grid gap-3 text-center`} style={{ gridTemplateColumns: `repeat(3, minmax(0, 1fr))` }}>
-                {results.originalOdds.map((o, i) => (
+              <div className={`grid gap-3 text-center mt-3`} style={{ gridTemplateColumns: `repeat(${tab==='1x2' ? '3' : '2'}, minmax(0, 1fr))` }}>
+                {results.fairO.map((o, i) => (
                   <div key={i}>
-                    <p className="text-gray-400 text-xs mb-1">{'1X12X2'[i*2]+(i===0?'':'2')}</p>
+                    <p className="text-gray-400 text-xs mb-1">
+                      {tab==='1x2' ? ['1','X','2'][i] : tab==='asian' ? ['Home','Away'][i] : ['Over','Under'][i]}
+                    </p>
                     <p className="text-lg font-mono font-semibold">{o}</p>
+                    <p className="text-xs text-gray-400">({results.fairP[i]})</p>
                   </div>
                 ))}
               </div>
