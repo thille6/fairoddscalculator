@@ -3,11 +3,8 @@ import react from '@vitejs/plugin-react';
 
 // GitHub Pages requires a base path based on the repository name
 // For GitHub Pages, the base should be '/fairoddscalculator/' (with leading and trailing slashes)
-const isGitHubPages = process.env.GITHUB_ACTIONS === 'true' || process.env.NODE_ENV === 'production' || process.env.CI === 'true';
-const basePath = isGitHubPages ? '/fairoddscalculator/' : '/';
-
 export default defineConfig({
-  base: basePath,
+  base: '/fairoddscalculator/',
   plugins: [react()],
   server: {
     open: true,
